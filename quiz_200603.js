@@ -9,19 +9,20 @@ const addTimeline = [
   { time: "14:30", value: 3 },
 ];
 
+/*
+ * 島田さんが書いたコード
+ */
 let ans = Object.values(
   baseTimeline.concat(addTimeline).reduce((acc, ele) => {
-    // console.log("////////////////////")
-    //   console.log("acc: ", acc)
-    //   console.log("ele: ", ele)
-    //   console.log("BEF: acc[ele.time]: ", acc[ele.time])
     acc[ele.time] = acc[ele.time] || {};
     acc[ele.time] = Object.assign(acc[ele.time], ele);
-    // console.log("AFT: acc[ele.time]: ", acc[ele.time])
     return acc;
   }, {})
 );
 
+/*
+ * 自分が書いたコード
+ */
 // addTimelineにだけ存在するtimeのリストを作る
 const timesOnlyAddTl = []
 for(let at of addTimeline){
@@ -37,9 +38,10 @@ const mergedTimeline = []
 for(let bt of baseTimeline){
     let mt = Object.assign({}, bt)
     for(let at of addTimeline){
-        if(bt.time === at.time)
+        if(bt.time === at.time){
             mt = Object.assign(bt, at)
             break
+        }
     }
     mergedTimeline.push(mt)
 }
@@ -48,11 +50,28 @@ for(let at of addTimeline){
     if(timesOnlyAddTl.indexOf(at.time) !== -1)
         mergedTimeline.push(Object.assign({}, at))
 }
-console.log(mergedTimeline)
+// console.log(mergedTimeline)
 
+/*
+ * 自分が書いたコード2
+ */
+const mergedTimeline2 = 
+  baseTimeline.concat(addTimeline).reduce((acc, ele) => {
+    const existIndex = acc.findIndex(tl => tl.time === ele.time);
+    acc.push(existIndex === -1 ? ele : Object.assign(acc.splice(existIndex, 1)[0], ele));
+    return acc;
+  }, []);
+console.log(mergedTimeline2)
 
+// let a = [1,2,3,4,5]
+// let b = {a: 12, b: "B"}
+// console.log({...a, ...b})
 
-// console.log(ans);
+// function sum(x, y, z) {
+//   return x + y + z;
+// }
+// const numbers = [1, 2, 3];
+// console.log(sum(...numbers));
 
 // const mergedTimeline = [
 //   { time: "13:00", value: 5, flag: true },
