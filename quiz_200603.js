@@ -12,56 +12,59 @@ const addTimeline = [
 /*
  * 島田さんが書いたコード
  */
-let ans = Object.values(
-  baseTimeline.concat(addTimeline).reduce((acc, ele) => {
-    acc[ele.time] = acc[ele.time] || {};
-    acc[ele.time] = Object.assign(acc[ele.time], ele);
-    return acc;
-  }, {})
-);
+// let ans = Object.values(
+//   baseTimeline.concat(addTimeline).reduce((acc, ele) => {
+//     acc[ele.time] = acc[ele.time] || {};
+//     acc[ele.time] = Object.assign(acc[ele.time], ele);
+//     return acc;
+//   }, {})
+// );
 
 /*
  * 自分が書いたコード
  */
 // addTimelineにだけ存在するtimeのリストを作る
-const timesOnlyAddTl = []
-for(let at of addTimeline){
-    let isExist = false
-    for(let bt of baseTimeline){
-        if(at.time === bt.time)
-            isExist = true
-    }
-    if(!isExist)
-        timesOnlyAddTl.push(at.time)
-}
-const mergedTimeline = []
-for(let bt of baseTimeline){
-    let mt = Object.assign({}, bt)
-    for(let at of addTimeline){
-        if(bt.time === at.time){
-            mt = Object.assign(bt, at)
-            break
-        }
-    }
-    mergedTimeline.push(mt)
-}
+// const timesOnlyAddTl = []
+// for(let at of addTimeline){
+//     let isExist = false
+//     for(let bt of baseTimeline){
+//         if(at.time === bt.time)
+//             isExist = true
+//     }
+//     if(!isExist)
+//         timesOnlyAddTl.push(at.time)
+// }
+// const mergedTimeline = []
+// for(let bt of baseTimeline){
+//     let mt = Object.assign({}, bt)
+//     for(let at of addTimeline){
+//         if(bt.time === at.time){
+//             mt = Object.assign(bt, at)
+//             break
+//         }
+//     }
+//     mergedTimeline.push(mt)
+// }
 // addTimelineにだけ存在するtimeを持つオブジェクトを追加
-for(let at of addTimeline){
-    if(timesOnlyAddTl.indexOf(at.time) !== -1)
-        mergedTimeline.push(Object.assign({}, at))
-}
+// for(let at of addTimeline){
+//     if(timesOnlyAddTl.indexOf(at.time) !== -1)
+//         mergedTimeline.push(Object.assign({}, at))
+// }
 // console.log(mergedTimeline)
 
 /*
  * 自分が書いたコード2
  */
-const mergedTimeline2 = 
-  baseTimeline.concat(addTimeline).reduce((acc, ele) => {
-    const existIndex = acc.findIndex(tl => tl.time === ele.time);
-    acc.push(existIndex === -1 ? ele : Object.assign(acc.splice(existIndex, 1)[0], ele));
+const mergedTimeline =
+  baseTimeline.concat(addTimeline).reduce((acc,ele) => {
+    const i = acc.findIndex(tl => tl.time === ele.time);
+    const addIndex = (i===-1)? acc.length : i;
+    acc[addIndex] = (i===-1)? Object.assign({},ele) : Object.assign(acc[i], ele);
     return acc;
   }, []);
-console.log(mergedTimeline2)
+console.log(mergedTimeline)
+// console.log(baseTimeline)
+// console.log(addTimeline)
 
 // let a = [1,2,3,4,5]
 // let b = {a: 12, b: "B"}
