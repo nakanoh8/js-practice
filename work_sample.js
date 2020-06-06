@@ -11,7 +11,6 @@ class ConnectViewService{
         return new ViewData().createJson(new RouteData());
     }
 }
-
 class Device {
   constructor(deviceType, conectDevices) {
     this.deviceType = deviceType;
@@ -20,7 +19,6 @@ class Device {
   }
   // getter & setter
 }
-
 class Block {
   constructor(blockName, blockNo) {
     this.blockName;
@@ -29,7 +27,6 @@ class Block {
   }
   // getter & setter
 }
-
 class RouteData {
   constructor() {
     this.devices = [];
@@ -44,7 +41,6 @@ class RouteData {
     this.blocks.push(new Block("kansai", "2"));
   }
 }
-
 class ViewData {
   static create(routeData) {
     const result = {
@@ -87,4 +83,24 @@ class ViewData {
     });
     return result;
   }
+}
+
+//********************
+
+//src/models
+class RouteInfoRep{
+    //表示するための情報を知ってる人
+    routeInfoTableRow
+    getViewDevices()
+    getViewLines()
+}
+class ViewDevice{
+    //
+}
+class ViewLine{
+    //
+}
+//src/service
+class ViewService{
+    //viewDevices&viewLinesを形成してJSONを作る
 }

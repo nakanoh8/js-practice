@@ -57,9 +57,10 @@ const addTimeline = [
  */
 const mergedTimeline =
   baseTimeline.concat(addTimeline).reduce((acc,ele) => {
-    const i = acc.findIndex(tl => tl.time === ele.time);
-    const addIndex = (i===-1)? acc.length : i;
-    acc[addIndex] = (i===-1)? Object.assign({},ele) : Object.assign(acc[i], ele);
+    const indexWithSameTime = acc.findIndex(tl => tl.time === ele.time);
+    (indexWithSameTime===-1)?
+      acc[acc.length] = Object.assign({},ele) :
+      acc[indexWithSameTime] = Object.assign(acc[indexWithSameTime], ele);
     return acc;
   }, []);
 console.log(mergedTimeline)
