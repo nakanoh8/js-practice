@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+      *,
+      :after,
+      :before {
+        box-sizing: inherit;
+      }
+      .switch {
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        position: relative;
+        margin-right: 0.5em;
+      }
+      .switch input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        opacity: 0;
+        outline: none;
+        z-index: -1;
+      }
+      .switch.is-rounded input[type="checkbox"] + .check,
+      .switch.is-rounded input[type="checkbox"] + .check:before {
+        border-radius: 290486px;
+      }
+      .switch input[type="checkbox"] + .check {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        width: 2.75em;
+        height: 1.575em;
+        padding: 0.2em;
+        background: #b5b5b5;
+        border-radius: 4px;
+        transition: background 0.15s ease-out, box-shadow 0.15s ease-out;
+      }
+      .switch input[type="checkbox"]:checked + .check {
+        background: #7957d5;
+      }
+      .switch input[type="checkbox"] + .check:before {
+        content: "";
+        display: block;
+        border-radius: 4px;
+        width: 1.175em;
+        height: 1.175em;
+        background: #f5f5f5;
+        box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.05),
+          0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.05);
+        transition: transform 0.15s ease-out;
+        will-change: transform;
+        transform-origin: left;
+      }
+      .switch input[type="checkbox"]:checked + .check:before {
+        transform: translate3d(100%, 0, 0);
+      }
+      /* focus周りの制御足りてない */
+      .switch .control-label {
+        padding-left: 0.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <label class="switch is-rounded">
+      <input type="checkbox" true-value="true" value="false" />
+      <span class="check"></span>
+      <span class="control-label">Default</span>
+    </label>
+  </body>
+</html>

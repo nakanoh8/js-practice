@@ -80,11 +80,41 @@
 // その他の文字はそのまま出力
 // この関数を用い，英語のメッセージを暗号化・復号化せよ．
 {
-
+    // const word = "abcdeアイウエオ";
+    const word = "I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind .";
+    const cipher = ([...word]) => {
+        const convRes = word.map(aCh => {
+            // 97番から122番までがアルファベットの小文字に割り当てられている。
+            return (97<=aCh.charCodeAt(0)) && (aCh.charCodeAt(0)<=122) ? 219 - aCh.charCodeAt(0) : aCh ;
+        });
+        return convRes.join("");
+    }
+    console.log(cipher(word));
 }
 
 // 09. Typoglycemia
 // スペースで区切られた単語列に対して，各単語の先頭と末尾の文字は残し，それ以外の文字の順序をランダムに並び替えるプログラムを作成せよ．ただし，長さが４以下の単語は並び替えないこととする．適当な英語の文（例えば"I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind ."）を与え，その実行結果を確認せよ．
 {
-    
+    const word = "I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind .";
+    const result = word.split(" ").map(ele=>{
+        const eleArr = [...ele];
+        if(eleArr.length < 5) return ele;
+        
+        const shuffle = (arr) => {
+            let m = arr.length;
+            while (m) {
+              const i = Math.floor(Math.random() * m--);
+              [arr[m], arr[i]] = [arr[i], arr[m]];
+            }
+            return arr;
+          };
+
+        const r = [];
+        r.push(eleArr[0]);
+        r.push(shuffle(eleArr.slice(1, eleArr.length-1)).join(""));
+        r.push(eleArr[eleArr.length-1]);
+        return r.join("");
+    }).join(" ");
+
+    console.log("09.", result);
 }
