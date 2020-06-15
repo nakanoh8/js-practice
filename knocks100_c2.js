@@ -1,12 +1,29 @@
 // 第2章: UNIXコマンドの基礎
 // hightemp.txtは，日本の最高気温の記録を「都道府県」「地点」「℃」「日」のタブ区切り形式で格納したファイルである．以下の処理を行うプログラムを作成し，hightemp.txtを入力ファイルとして実行せよ．さらに，同様の処理をUNIXコマンドでも実行し，プログラムの実行結果を確認せよ．
 
+const fs = require('fs');
+
 // 10. 行数のカウント
 // 行数をカウントせよ．確認にはwcコマンドを用いよ．
+{
+    fs.readFile('./data/hightemp.txt', { encoding: 'utf8' }, (err, file) => {
+        // const rowCount = file.split('\n').length - 1;
+        const rowCount = (file.match(/\n/g) || []).length;
+        console.log('10.', rowCount);
+    });
+    // wc -l ./data/hightemp.txt
+}
 
 // 11. タブをスペースに置換
 // タブ1文字につきスペース1文字に置換せよ．確認にはsedコマンド，trコマンド，もしくはexpandコマンドを用いよ．
-
+{
+    fs.readFile('./data/hightemp.txt', { encoding: 'utf8' }, (err, file) => {
+        console.log('11.', file.replace(/\t/g, ' '));
+    });
+    // (x) sed -e 's/<tab>/<space>/g' ./data/hightemp.txt
+    // (x) cat ./data/hightemp.txt | tr '\t' ' '
+    // expand ./data/hightemp.txt
+}
 // 12. 1列目をcol1.txtに，2列目をcol2.txtに保存
 // 各行の1列目だけを抜き出したものをcol1.txtに，2列目だけを抜き出したものをcol2.txtとしてファイルに保存せよ．確認にはcutコマンドを用いよ．
 
