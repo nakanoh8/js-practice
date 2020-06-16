@@ -26,7 +26,13 @@ const fs = require('fs');
 }
 // 12. 1列目をcol1.txtに，2列目をcol2.txtに保存
 // 各行の1列目だけを抜き出したものをcol1.txtに，2列目だけを抜き出したものをcol2.txtとしてファイルに保存せよ．確認にはcutコマンドを用いよ．
-
+{
+    const file = fs.readFileSync('./data/hightemp.txt', { encoding: 'utf8' });
+    fs.writeFileSync('./data/col1.txt', file.split('\n')[0]);
+    fs.writeFileSync('./data/col2.txt', file.split('\n')[1]);
+    // head -n 2 ./data/hightemp.txt
+    // cutでの確認方法は不明
+}
 // 13. col1.txtとcol2.txtをマージ
 // 12で作ったcol1.txtとcol2.txtを結合し，元のファイルの1列目と2列目をタブ区切りで並べたテキストファイルを作成せよ．確認にはpasteコマンドを用いよ．
 
